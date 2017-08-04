@@ -3,49 +3,33 @@
 <head>
   <meta charset='utf-8'>
   <title>Pauper Cube</title>
-  <style>
-    body {
-      margin: 0;
-      background: #1a2f2a;
-      padding: 0 32px 32px 287px;
-      font-family: "Lucida Console", monospace;
-      color: white;
-    }
-    h3 {
-      margin: 0;
-      padding: 1em 0 0.75em;
-      font-size: 1.25em;
-    }
-    ul {
-      margin: -3px;
-      padding: 0;
-      list-style: none;
-    }
-    li {
-      float: left;
-      margin: 3px;
-    }
-    li[data-checked="false"] {
-      opacity: 0.5;
-    }
-    img {
-      display: block;
-      width: 92px;
-      height: 128px;
-      border-radius: 4px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
-    }
-    #large-card {
-      position: fixed;
-      left: 32px;
-      top: 57px;
-      width: 223px;
-      height: 310px;
-      border-radius: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="css.css">
 </head>
 <body>
+
+  <div id="search-popup" class="hidden">
+    <div id="popup-closer">X</div>
+    <div id="search-container">
+    <form id="search-form">
+      <input type="text" placeholder="Search For A Card">
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="search-large-card">
+      <img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=xxx&type=card" id="search-large-img"/>
+    </div>
+
+    <div id="search-results">
+      <h4>Search Results:</h4>
+    </div>
+
+    </div>
+  </div>
+
+  <div id="search">
+    <div id="search-link">Card Search</div>
+  </div>
+
   <img id="large-card" alt="placeholder" src="http://gatherer.wizards.com/Handlers/Image.ashx?name=xxx&type=card">
   <h3 id="colorless">Colorless</h3>
   <ul>
@@ -437,33 +421,6 @@
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Vengeful%20Rebirth"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Vengeful%20Rebirth&amp;set=&amp;type=card" alt="Vengeful Rebirth"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Fusion%20Elemental"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Fusion%20Elemental&amp;set=&amp;type=card" alt="Fusion Elemental"></a></li>
   </ul>
-  <script>
-    (function() {
-      'use strict';
-
-      var repeat = function(n, s) { return new Array(n + 1).join(s); };
-      var counts = [];
-      var output = '\n';
-      var nodeList = document.getElementsByTagName('h3');
-      for (var idx = 0; idx < nodeList.length; idx += 1) {
-        var left = nodeList[idx].textContent + ' ';
-        var right = ' ' + (counts[counts.length] = nodeList[idx].nextElementSibling.getElementsByTagName('li').length);
-        output += left + repeat(20 - left.length - right.length, '.') + right + '\n';
-      }
-      var total = String(counts.reduce(function(a, b) { return a + b; }, 0));
-      output += repeat(20, '=') + '\n';
-      output += repeat(20 - total.length, ' ') + total + '\n';
-      output += '\n';
-      console.log(output);
-
-      var largeCard = document.getElementById('large-card');
-      document.body.addEventListener('mouseover', function(event) {
-        if (event.target.tagName === 'IMG') {
-          largeCard.alt = event.target.alt;
-          largeCard.src = event.target.src;
-        }
-      }, false);
-    }());
-  </script>
+  <script src="js.js"></script>
 </body>
 </html>
