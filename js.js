@@ -69,16 +69,36 @@ console.log(imgUrls)
 
 let searchInput = document.querySelector('#search-form input');
 let searchForm = document.querySelector('#search-form');
+let searchList = document.querySelector('#search-results ul');
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  searchList.innerHTML = '';
   if (imgUrls.indexOf(searchInput.value) > -1) {
     console.log(searchInput.value);
+    let newCard = document.createElement('li');
+    newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
+      searchInput.value
+    }"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=${
+      searchInput.value
+    }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
+    searchList.append(newCard);
   }
 
-  imgUrls.forEach((ele) => {
+  else { imgUrls.forEach((ele) => {
     if (ele.indexOf(searchInput.value) > -1) {
       console.log(ele)
+      let newCard = document.createElement('li');
+      newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
+        ele
+      }"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=${
+        ele
+      }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
+      searchList.append(newCard);
     }
   })
+}
 
+  if (searchList.innerHTML === '') {
+    searchList.innerHTML = '<h4>No Results!</h4>'
+  }
 })
