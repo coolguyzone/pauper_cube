@@ -59,20 +59,22 @@ imgs.forEach((element) => {
   imgUrls.push(element.src);
 });
 
+//parse the names out of the list of URLs
 imgUrls = imgUrls.map((ele) => {
   ele = ele.substring(0, ele.indexOf('&'));
   ele = ele.substring(ele.indexOf('=') + 1, ele.length).toLowerCase();
   return ele.split('%20').join(' ').split('%27').join(`'`);
 })
 
-console.log(imgUrls)
-
+//search functionality
 let searchInput = document.querySelector('#search-form input');
 let searchForm = document.querySelector('#search-form');
 let searchList = document.querySelector('#search-results ul');
 searchForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  //clear previous search Results
   searchList.innerHTML = '';
+  //check for exact match
   if (imgUrls.indexOf(searchInput.value) > -1) {
     console.log(searchInput.value);
     let newCard = document.createElement('li');
@@ -83,7 +85,7 @@ searchForm.addEventListener('submit', (event) => {
     }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
     searchList.append(newCard);
   }
-
+//check for partial match
   else { imgUrls.forEach((ele) => {
     if (ele.indexOf(searchInput.value) > -1) {
       console.log(ele)
@@ -94,11 +96,11 @@ searchForm.addEventListener('submit', (event) => {
         ele
       }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
       searchList.append(newCard);
-    }
-  })
-}
-
-  if (searchList.innerHTML === '') {
-    searchList.innerHTML = '<h4>No Results!</h4>'
+      }
+    })
   }
-})
+//check for no results
+  if (searchList.innerHTML === '') {
+    searchList.innerHTML = '<h1>No Results!</h1>';
+  }
+});
