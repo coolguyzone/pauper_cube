@@ -51,3 +51,34 @@ searchLink.addEventListener('click', () => {
 popupCloser.addEventListener('click', () => {
   searchPopup.classList.add('hidden');
 });
+
+//create a list of all the available cards
+let imgs = document.querySelectorAll('img');
+let imgUrls = [];
+imgs.forEach((element) => {
+  imgUrls.push(element.src);
+});
+
+imgUrls = imgUrls.map((ele) => {
+  ele = ele.substring(0, ele.indexOf('&'));
+  ele = ele.substring(ele.indexOf('=') + 1, ele.length).toLowerCase();
+  return ele.split('%20').join(' ').split('%27').join(`'`);
+})
+
+console.log(imgUrls)
+
+let searchInput = document.querySelector('#search-form input');
+let searchForm = document.querySelector('#search-form');
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (imgUrls.indexOf(searchInput.value) > -1) {
+    console.log(searchInput.value);
+  }
+
+  imgUrls.forEach((ele) => {
+    if (ele.indexOf(searchInput.value) > -1) {
+      console.log(ele)
+    }
+  })
+
+})
