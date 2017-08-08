@@ -43,7 +43,7 @@ img {
 }
 
 #search-link {
-  border: 2px solid white;
+  border: 2px solid  white;
   width: 180px;
   height: 40px;
   line-height: 40px;
@@ -82,7 +82,6 @@ img {
 }
 
 #search-form {
-  border: 2px solid green;
   margin-left: 5%;
   width: 40%;
   height: 40px;
@@ -114,7 +113,6 @@ img {
 
 #search-results {
   display: inline-block;
-  border: 2px solid red;
   height: 360px;
   width: 62%;
   position: absolute;
