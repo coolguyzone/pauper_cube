@@ -15,7 +15,6 @@
   output += repeat(20, '=') + '\n';
   output += repeat(20 - total.length, ' ') + total + '\n';
   output += '\n';
-  console.log(output);
 
   var largeCard = document.getElementById('large-card');
   document.body.addEventListener('mouseover', function(event) {
@@ -76,7 +75,6 @@ searchForm.addEventListener('submit', (event) => {
   searchList.innerHTML = '';
   //check for exact match
   if (imgUrls.indexOf(searchInput.value) > -1) {
-    console.log(searchInput.value);
     let newCard = document.createElement('li');
     newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
       searchInput.value
@@ -88,7 +86,6 @@ searchForm.addEventListener('submit', (event) => {
 //check for partial match
   else { imgUrls.forEach((ele) => {
     if (ele.indexOf(searchInput.value) > -1) {
-      console.log(ele)
       let newCard = document.createElement('li');
       newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
         ele
@@ -99,6 +96,74 @@ searchForm.addEventListener('submit', (event) => {
       }
     })
   }
+//check for no results
+  if (searchList.innerHTML === '') {
+    searchList.innerHTML = '<h1>No Results!</h1>';
+  }
+});
+
+//gather text information for cards
+
+const url = 'https://api.magicthegathering.io/v1/cards?name=grim monolith';
+
+
+
+
+imgUrls.shift();
+imgUrls.shift();
+
+let allCardData = [];
+
+imgUrls.forEach((element) => {
+  fetch(`https://api.magicthegathering.io/v1/cards?name=${element}`)
+    .then((res) => {
+      return res.json();
+    })
+    .then ((res) => {
+      allCardData.push([element, res.cards[0].text]);
+    })
+})
+
+
+let searchTextButton = document.querySelector('#search-text-button');
+searchTextButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  //clear previous search Results
+  searchList.innerHTML = '';
+
+
+//check for partial match
+   allCardData.forEach((ele) => {
+     if (ele[1] != undefined) {
+       if (ele[1].toLowerCase().indexOf(searchInput.value) > -1) {
+         let newCard = document.createElement('li');
+         newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
+           ele[0]
+         }"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=${
+           ele[0]
+         }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
+         searchList.append(newCard);
+         }
+     }
+
+    })
+
+    // for (let i = 0; i < allCardData.length; i++) {
+    //   let cardText = allCardData[i][1];
+    //   if (cardText != undefined) {
+    //     if (cardText.indexOf(searchInput.value) > -1) {
+    //       let newCard = document.createElement('li');
+    //       newCard.innerHTML = `<li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=${
+    //         allCardData[i][0]
+    //       }"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=${
+    //         allCardData[i][0]
+    //       }&amp;set=&amp;type=card" alt="Arcbound Worker"></a></li>`;
+    //       searchList.append(newCard);
+    //       }
+    //   }
+    //
+    // }
+
 //check for no results
   if (searchList.innerHTML === '') {
     searchList.innerHTML = '<h1>No Results!</h1>';

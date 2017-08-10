@@ -83,7 +83,6 @@ img {
 
 #search-form {
   margin-left: 5%;
-  width: 40%;
   height: 40px;
   padding: 5px 0;
 }
@@ -99,6 +98,13 @@ img {
   font-size: 1.2em;
   border-radius: 5px;
 }
+
+#search-text-button {
+  height: 30px;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
 #search-large-card {
   display: inline-block;
 }
