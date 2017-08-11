@@ -451,6 +451,13 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
+        var picks = [].concat.apply([], response.result.values);
+        var images = document.querySelectorAll('img');
+        for (var i = 2; i < images.length; i++){
+          if(picks.indexOf(images[i].alt) !== -1){
+            images[i].style.opacity = 0.5;
+          }
+        }
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
