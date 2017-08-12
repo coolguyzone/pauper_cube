@@ -34,7 +34,8 @@
   <div id="search">
     <div id="search-link">Card Search</div>
   </div>
-
+  <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
+  <h2 id="picksCount">0 Picks Made</h2> 
   <img id="large-card" alt="placeholder" src="http://gatherer.wizards.com/Handlers/Image.ashx?name=xxx&type=card">
   <h3 id="colorless">Colorless</h3>
   <ul>
@@ -452,12 +453,16 @@
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
         var picks = [].concat.apply([], response.result.values).map(pick => { return pick.toLowerCase();});
-        var images = document.querySelectorAll('img');
+        var images = document.querySelectorAll('img'),
+            picksCount = 0;
         for (var i = 2; i < images.length; i++){
           if(picks.indexOf(images[i].alt.toLowerCase()) !== -1){
             images[i].style.opacity = 0.3;
+            picksCount += 1;
           }
         }
+
+        document.getElementById('picksCount').innerHTML = picksCount + (picksCount === 1 ? ' Pick Made' : ' Picks Made');
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
@@ -510,8 +515,6 @@
   <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
-    <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-    <button id="signout-button" onclick="handleSignOutClick()">Sign out</button>
+  </script>  
 </body>
 </html>
