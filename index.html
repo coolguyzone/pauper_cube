@@ -35,7 +35,8 @@
     <div id="search-link">Card Search</div>
   </div>
   <button id="signin-button" onclick="handleSignInClick()">Sign in</button>
-  <h2 id="picksCount">0 Picks Made</h2> 
+  <h2 id="picksShownCount">0 Picks Shown</h2>
+  <h2 id="picksMadeCount">0 Picks Made</h2> 
   <img id="large-card" alt="placeholder" src="http://gatherer.wizards.com/Handlers/Image.ashx?name=xxx&type=card">
   <h3 id="colorless">Colorless</h3>
   <ul>
@@ -175,7 +176,7 @@
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Silent%20Departure"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Silent%20Departure&amp;set=&amp;type=card" alt="Silent Departure"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Azure%20Mage"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Azure%20Mage&amp;set=&amp;type=card" alt="Azure Mage"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Welkin%20Tern"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Welkin%20Tern&amp;set=&amp;type=card" alt="Welkin Tern"></a></li>
-    <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Vaporkin"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Vaporkin&amp;set=&amp;type=card" alt="Vapor Kin"></a></li>
+    <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Vaporkin"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Vaporkin&amp;set=&amp;type=card" alt="Vaporkin"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Augur%20of%20Bolas"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Augur%20of%20Bolas&amp;set=&amp;type=card" alt="Augur of Bolas"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Frost%20Walker"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Frost%20Walker&amp;set=&amp;type=card" alt="Frost Walker"></a></li>
     <li data-checked="true"><a href="http://gatherer.wizards.com/Pages/Card/Details.aspx?name=Merfolk%20Looter"><img src="http://gatherer.wizards.com/Handlers/Image.ashx?name=Merfolk%20Looter&amp;set=&amp;type=card" alt="Merfolk Looter"></a></li>
@@ -462,7 +463,8 @@
           }
         }
 
-        document.getElementById('picksCount').innerHTML = picksCount + (picksCount === 1 ? ' Pick Made' : ' Picks Made');
+        document.getElementById('picksShownCount').innerHTML = picksCount + (picksCount === 1 ? ' Pick Shown' : ' Picks Shown');
+        document.getElementById('picksMadeCount').innerHTML = picks.length + (picks.length === 1 ? ' Pick Made' : ' Picks Made');
       }, function(reason) {
         console.error('error: ' + reason.result.error.message);
       });
