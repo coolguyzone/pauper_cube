@@ -453,7 +453,7 @@
       request.then(function(response) {
         // TODO: Change code below to process the `response` object:
         console.log(response.result);
-        var picks = [].concat.apply([], response.result.values).map(pick => { return pick.toLowerCase();});
+        var picks = [].concat.apply([], response.result.values).map(pick => { return pick.toLowerCase();}).filter(pick => pick.length);
         var images = document.querySelectorAll('img'),
             picksCount = 0;
         for (var i = 2; i < images.length; i++){
