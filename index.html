@@ -455,11 +455,16 @@
         console.log(response.result);
         var picks = [].concat.apply([], response.result.values).map(pick => { return pick.toLowerCase();}).filter(pick => pick.length);
         var images = document.querySelectorAll('img'),
+            imageNames = images.map(img => {return img.alt.toLowerCase()}),
             picksCount = 0;
-        for (var i = 2; i < images.length; i++){
-          if(picks.indexOf(images[i].alt.toLowerCase()) !== -1){
-            images[i].style.opacity = 0.3;
+
+        for (var i = 0; i < picks.length; i++){
+          var index = imageNames.indexOf(picks[i]);
+          if(index !== -1){
+            images[index].style.opacity = 0.3;
             picksCount += 1;
+          } else {
+            console.log(picks[i]);
           }
         }
 
