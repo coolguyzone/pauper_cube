@@ -114,6 +114,10 @@ imgUrls.shift();
 
 let allCardData = [];
 
+let counter = imgUrls.length;
+let searchTextButton = document.querySelector('#search-text-button');
+
+
 imgUrls.forEach((element) => {
   fetch(`https://api.magicthegathering.io/v1/cards?name=${element}`)
     .then((res) => {
@@ -121,11 +125,14 @@ imgUrls.forEach((element) => {
     })
     .then ((res) => {
       allCardData.push([element, res.cards[0].text]);
+      counter --;
+      if (counter === 0) {
+        searchTextButton.innerHTML = "Text Search";
+      }
     })
 })
 
 
-let searchTextButton = document.querySelector('#search-text-button');
 searchTextButton.addEventListener('click', (event) => {
   event.preventDefault();
   //clear previous search Results
